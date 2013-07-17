@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `CellPhone` varchar(16) COLLATE utf8_bin NOT NULL,
   `Skype` varchar(40) COLLATE utf8_bin NOT NULL,
   `FacebookId` varchar(40) COLLATE utf8_bin NOT NULL,
-  `FacebookToken`` varchar(255) COLLATE utf8_bin NOT NULL,
+  `FacebookToken` varchar(255) COLLATE utf8_bin NOT NULL,
   `StartStamp` bigint(20) unsigned NOT NULL,
   `LastStamp` bigint(20) unsigned NOT NULL,
   `SignupIP` varchar(25) COLLATE utf8_bin NOT NULL,
