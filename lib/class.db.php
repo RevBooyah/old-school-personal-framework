@@ -77,37 +77,20 @@ class mysql extends db {
 	}
 	
 	
-	public function getArray($query) {
+	public function getArray($query,$params=array()) {
 		$q = $this->link->prepare($query);
-		$q->execute();
+		$q->execute($params);
 		return($q->fetchAll());
-		/*
-		$result = mysql_query($query, $this->link);
-		$return = array();
-		if ($result) {
-			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-				$return[] = $row;
-			}
-		}
-		return $return;
-		 */
 	}
 	
-	public function getRow($query/*,$only_keys=true*/) {
+	public function getRow($query,$params=array()) {
 		$q = $this->link->prepare($query);
-		$q->execute();
+		//if(count($params)>0) {
+			$q->execute($params);
+		//} else {
+			//$q->execute($params);
+		//}
 		return($q->fetch());
-		/*
-		$result = mysql_query($query, $this->link);
-		$return = array();
-		if ($result) {
-			$mfunc = (true==$only_keys)?"mysql_fetch_assoc":"mysql_fetch_array";
-			while ($row = $mfunc($result)) {
-				$return = $row;
-			}
-		}
-		return $return;
-		*/
 	}
 
 

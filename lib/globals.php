@@ -1,6 +1,6 @@
 <?php
 
-namespace SCCFramework
+namespace SCCFramework;
 
 // Usually easiest to set this in web server conf files.
 @session_start();
@@ -45,9 +45,9 @@ define("BOOTSTRAP_CDN",'http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/c
 
 // DB Definitions
 define('DB_HOST','localhost');
-define('DB_NAME','The Name of the Database');
-define('DB_USER','The database user');
-define('DB_PASS','The database password');
+define('DB_NAME','test');
+define('DB_USER','SCook');
+define('DB_PASS','');
 define('OS_OWNER','The file owner - for permissions');
 define('OS_GROUP','The file group - for multiple accounts');
 
