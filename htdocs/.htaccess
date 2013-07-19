@@ -1,0 +1,41 @@
+# If you want to password enable the site, uncomment the following
+#AuthUserFile /path/to/web/root/.htpasswd
+#AuthGroupFile /path/to/weeb/root/.pwdgroups
+#AuthName "Website Coming Soon"
+#AuthType Basic
+#<Limit GET>
+#require group dev
+#</Limit>
+
+# Turn on URL Rewriting!
+RewriteEngine on
+RewriteBase /
+
+#You can add slashes to the end of the first argument to force "directory" only (for SEO mainly)
+RewriteRule ^signin signin.php [L]
+RewriteRule ^signout signout.php [L]
+RewriteRule ^register register.php [L]
+RewriteRule ^account account.php [L]
+RewriteRule ^pricing pricing.php [L]
+RewriteRule ^terms terms.php [L]
+RewriteRule ^privacy privacy.php [L]
+RewriteRule ^reminder reminder.php [L]
+RewriteRule ^about about.php [L]
+
+
+# If you want to remove the "www" from the URL
+##RewriteCond %{HTTP_HOST} ^www\.mydomain\.com$
+##RewriteRule ^(.*)$ http://mydomain.com/$1 [R=301,L]
+#
+#
+## This will make all requests to index.html go to / in that dir.
+##RewriteCond %{THE_REQUEST} ^.*/index.html
+##RewriteRule ^(.*)index.html$ http://mydomain.com/$1 [R=301,L]
+#
+## This is to get all members directly to their account page.
+##RewriteCond %{REQUEST_URI} !^/(register|account|member|signin|signout)/ [NC]
+##RewriteRule (.*) http://mydomain.com/account/ [L]
+#
+# If there is a catch-all for not-found files, this will do it.
+##RewriteCond %{REQUEST_FILENAME} !-f
+##RewriteRule ^(.*) news.php [L]
