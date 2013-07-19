@@ -82,22 +82,24 @@ class mysql extends db {
 		$q->execute($params);
 		return($q->fetchAll());
 	}
-	
+
+	/**
+	* Get a single row of results (or return just the first row)
+	* 	
+	* @param mixed $query   The query to send to the database
+	* @param mixed $params  an array to be parsed by the PDO::execute
+	*/
 	public function getRow($query,$params=array()) {
 		$q = $this->link->prepare($query);
-		//if(count($params)>0) {
-			$q->execute($params);
-		//} else {
-			//$q->execute($params);
-		//}
+		$q->execute($params);
 		return($q->fetch());
 	}
 
 
 
-	public function query($query) {
+	public function query($query,$params=array()) {
 		$q = $this->link->prepare($query);
-		$q->execute();
+		$q->execute($params);
 		return($q->fetch());
 		/*
 		$result=mysql_query($query, $this->link);

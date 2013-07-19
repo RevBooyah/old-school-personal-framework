@@ -23,6 +23,9 @@ define("ADMIN_DOMAIN","http://support".DOMAIN."/");
 // Domain for the cookies. Adding the . makes cookies universal across all subdomains - not generally good for CDNs with same TLD
 define("COOKIE_DOMAIN",'.'.DOMAIN); 
 
+// Password salt for hashing - this should be something unique.
+define("PASSWORD_SALT","CHANGE THIS NOW! - Because if you leave it like this, anybody can decrypt your passwords!");
+define("PASSWORD_HASHES",1000); // The number of times to hash the password. 1000 is good.
 
 define("HTDOCS_DIR",ROOT_DIR.'htdocs/');
 define("IMAGE_DIR",HTDOCS_DIR.'images/');
