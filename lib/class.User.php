@@ -82,7 +82,7 @@ class User extends DB_User {
 		$_SESSION['Email']   = $this->Email;
 		$_SESSION['UserID']  = $this->UserID;
 		$_SESSION['Pass']    = $this->Pass;
-		$_SESSION['Name']    = $this->UserName;
+		$_SESSION['Name']    = $this->Name;
 		// Keep a serialized version of this entire object.
 		$us=serialize($this);
 		$_SESSION['User']=$us;
@@ -107,7 +107,7 @@ class User extends DB_User {
 		//setcookie("CkSessID",$sid,0,"/",COOKIE_DOMAIN);
 		setcookie("CkInTime",$ctm,0,"/",COOKIE_DOMAIN);
 		setcookie("CkUserID",$this->UserID,0,"/",COOKIE_DOMAIN);
-		setcookie("CkName",$this->FullName,$ctmrem,"/",COOKIE_DOMAIN);
+		setcookie("CkName",$this->Name,$ctmrem,"/",COOKIE_DOMAIN);
 		setcookie("CkEmail",$this->Email,$ctmrem,"/",COOKIE_DOMAIN);
 	}
 
