@@ -159,7 +159,7 @@ class User extends DB_User {
 	public function verifyPassword($email,$pass) {
 		// Get the password from the database.
 		$q='SELECT UserID,Pass FROM '.DB_NAME.".User WHERE Email LIKE :email LIMIT 1";
-		$params=array(":email",$pass);
+		$params=array(":email"=>$email);
 		$link=db::factory();
 		$r=$link->getRow($q,$params);
 		
@@ -195,7 +195,7 @@ class User extends DB_User {
 		//Name must be ESCAPED BEFORE SUBMITTING!
 		$link=db::factory();
 		$q="SELECT UserID,Email FROM ".DB_NAME.".User WHERE Email LIKE :email LIMIT 1";
-		$result=$link->getArray($q,array(":email",$email));
+		$result=$link->getArray($q,array(":email"=>$email));
 		if(count($result)<1) return(true);
 		if(isset($result['UserID']) && $result['UserID']<>$id) return(false);
 		return(true);
@@ -212,7 +212,7 @@ class User extends DB_User {
 		//Name must be ESCAPED BEFORE SUBMITTING!
 		$link=db::factory();
 		$q="SELECT UserID,UserName FROM ".DB_NAME.".User WHERE UserName LIKE :uname LIMIT 1";
-		$result=$link->getArray($q,array(":uname",$name));
+		$result=$link->getArray($q,array(":uname"=>$name));
 		if(count($result)<1) return(true);
 		if(isset($result['UserID']) && $result['UserID']<>$id) return(false);
 		return(true);
@@ -226,7 +226,7 @@ class User extends DB_User {
 	public function getUserID($em) {
 		$link=db::factory();
 		$q="SELECT UserID FROM ".DB_NAME.".User WHERE Email LIKE :email AND Active>0 LIMIT 1";
-		$result=$link->getArray($q,array(":email",$em));
+		$result=$link->getArray($q,array(":email"=>$em));
 		if(count($result)<1) {
 			return(0);
 		}
