@@ -13,30 +13,45 @@ ob_start();
 if (isset($_SESSION['Email']) && strlen($_SESSION['Email'])>4 
 	&& isset($_COOKIE['CkUserID']) && isset($_SESSION['UserID']) 
 	&& $_COOKIE['CkUserID']==$_SESSION['UserID']) {
-	$u=unserialize($_SESSION['User']);
-	// You can change the following based on if this is a "popup" signing form on all pages.
-	// If it's an ajax load on all pages, just have it echo "Already signed in". 
-	//
-	// Then redirect if it's on the /signin/ page.
-	header("Location: /account/");
+	//$u=unserialize($_SESSION['User']);
+	echo "<script type='text/javascript'>\nwindow.location='/account/'\n</script>\n";
+        echo "<p>Please wait while we take you to your <a href='/account/'>Account Page</a></p>.";
 	exit();
-	//echo "<script type='text/javascript'>\nwindow.location='/account/'\n</script>\n";
-	//echo "<p>Please wait while we take you to your <a href='/account/'>Account Page</a></p>.";
-	//exit();
 }
 
 
 // Set the errors to an empty array - no errors yet...
 $Error=array();
-
+$def['Email']='';
 
 // It's a submission
 if(count($_POST)>1) {
 	// Filter the variables.
-	
-
-
+	$def['Email']=filter_input(INPUT_POST,'em',FILTER_VALIDATE_EMAIL);
+	if(!$def['Email']) {
+		$Error[]="You must include a valid email.";
+		$def['Email']=$_POST['Email']; // Could strip quotes and tags
+	}
+	if(!isset($_POST['em']) || strlen($_POST['em'])<6 || strlen($_POST['em'])>30) {
+		$Error[]="You must include a valid password.";
+	}
+	if(count($Error)<1) {
+		// No problems, so attempts a signin
+		$newu=new User();
+		$tmpuid=$newu->verifyPassword($def['Email'],$_POST['em']);
+		if($tmpuid<1) {
+			$Error[]="Unknown email address or invalid password.";
+		} else {
+			$newu->signIn($tmpuid);
+			exit();
+		}
+	}
 }
+
+printJScript();
+printErrors();
+printForm();
+
 
 /**
  * Print the javascript section of the form.
