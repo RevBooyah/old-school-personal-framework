@@ -61,6 +61,7 @@ class User extends DB_User {
 		if(strpos($loc,"/ajax/")!==false) {
 			$loc='/account/';
 		}
+                // check to see if they redirect
 		if($redirect) { // Does it need to be a redirect with javascript? - used for ajax based signin forms.
 			echo "<script type='text/javascript'>\nwindow.location='".$loc."';\n</script>\n";
 			echo "<p>Please wait while we <a href='".$loc."'>redirect you</a>.</p>";
