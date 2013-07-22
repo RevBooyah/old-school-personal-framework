@@ -1,0 +1,10 @@
+# Allow all bots
+User-agent: *
+
+#They don't need to go everywhere
+Disallow: /forms/
+Disallow: /js/
+Allow: /
+
+User-agent: Mediapartners-Google
+Disallow:
