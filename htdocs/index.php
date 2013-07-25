@@ -3,25 +3,21 @@
 require_once("globals.php");
 
 
-$PageTitle='Sign In';
-
-
-$jscript=<<<__ENDJSCRIPT__
-
-<script type="text/javascript">
-$(document).ready(function() {
-        $("#signinwrap").load("/forms/frmSignIn.php");
-});
-</script>
-
-
-__ENDJSCRIPT__;
-
+$PageTitle='Website Homepage';
 
 require_once("header.php");
 
 ?>
 
+<script>
+
+$(document).ready(function() {
+        $("#signinform").load("/forms/frmSignIn.php");
+});
+
+
+
+</script>
 
 <article>
 <h2>Sign In</h2>

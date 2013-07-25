@@ -49,8 +49,8 @@ if(count($_POST)>1) {
 }
 
 printJScript();
-printErrors();
-printForm();
+printErrors($Error);
+printForm($def);
 
 
 /**
@@ -101,7 +101,7 @@ function isValidEmail(strEmail){
 
 
 function printErrors($err) {
-	if(count($err)<1) return();
+	if(count($err)<1) return(true);
 	print("<ul class='error-list'>\n");
 	foreach($err as $e) {
 		print("<li>$e</li>\n");
@@ -110,7 +110,7 @@ function printErrors($err) {
 }
 
 
-function PrintForm() {
+function printForm($def) {
 ?>
 
 
