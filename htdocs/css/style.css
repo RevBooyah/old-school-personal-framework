@@ -49,3 +49,66 @@ textarea:-moz-placeholder { color:#a9a9a9; }
 
 
 }
+
+h2 {
+		font-size: 1.5em;
+		font-weight: bold;
+}
+.wrapper {
+		width: 980px;
+		margin: 0 auto;
+		padding: 5px 10px;
+}
+
+header {
+		background: #cccccc;
+		float: left;
+		width: 100%;
+		margin:0 auto;
+}
+
+header h1 {
+		font-size: 2.0em;
+		font-weight:bold;
+}
+header h1 a, header h1 a {
+		text-decoration: none;
+}
+
+nav ol {
+		list-style:none;
+		margin-bottom: 10px;
+}
+nav ol li {
+		display: inline;
+		margin-right: 10px;
+}
+
+article { width: 800px; float:left; padding: 18px 10px;}
+aside {
+		float:right;
+		width: 150px;
+		padding: 6px;
+		background: #cccccc;
+		border-left: 1px solid #666;
+		height: 100%;
+}
+footer {
+		clear:both;
+		display: block;
+		border-top: 1px solid #555;
+		margin: 15px auto;
+		width: 100%;
+		padding: 5px;
+		background: #dddddd;
+}
+
+form {
+		margin: 14px;
+}
+form label {
+		display:block;
+		clear: both;
+		margin-top: 8px;
+		font-weight:bold;
+}
