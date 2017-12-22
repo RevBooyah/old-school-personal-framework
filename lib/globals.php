@@ -105,3 +105,98 @@ $analytics_code=<<<__ANALYTICS__
 </script>
 
 __ANALYTICS__;
+
+
+
+
+function getAlertString($msg,$level=0,$wide=12,$title='') {
+        //This is normally surrounded by a row-fluid, but doesn't to handle different widths. max=12;
+        $msgsize=0;
+        if(is_array($msg)) {
+		$omsg='<ul>'; 
+		foreach($msg as $k=>$v) {
+			$v=trim($v);
+			$msgsize+=strlen($v);
+			$omsg.="<li>$v</li>\n";
+		}
+		$omsg.='</ul>'; 
+		$msg=$omsg;
+        } else {
+       		$msgsize=strlen($msg);
+        }
+        if($msgsize<1) return("");
+
+        $alertTypes=array(0=>" ",1=>"alert-error",2=>"alert-success",3=>"alert-info");
+        $altype = $alertTypes[$level];
+        $title=(strlen($title)>0)?"<h3>$title</h3>":'';
+        $out=<<<_ALERTSTR_
+        <div class="alert $altype span$wide" style='text-align:left;'>
+                <a class="close" data-dismiss="alert">x</a>
+                $title
+                $msg
+                </div>
+_ALERTSTR_;
+        return($out);
+}
+
+/**
+ * Debug Printing made easy
+ **/
+function prePrint($obj) {
+        print("\n<pre>\n".print_r($obj,true)."\n</pre>\n");
+}
+
+function is_serialized( $data, $strict = true ) {
+	// if it isn't a string, it isn't serialized.
+	if ( ! is_string( $data ) ) {
+		return false;
+	}
+	$data = trim( $data );
+	if ( 'N;' == $data ) {
+		return true;
+	}
+	if ( strlen( $data ) < 4 ) {
+		return false;
+	}
+	if ( ':' !== $data[1] ) {
+		return false;
+	}
+	if ( $strict ) {
+		$lastc = substr( $data, -1 );
+		if ( ';' !== $lastc && '}' !== $lastc ) {
+			return false;
+		}
+	} else {
+		$semicolon = strpos( $data, ';' );
+		$brace     = strpos( $data, '}' );
+		// Either ; or } must exist.
+		if ( false === $semicolon && false === $brace )
+			return false;
+		// But neither must be in the first X characters.
+		if ( false !== $semicolon && $semicolon < 3 )
+			return false;
+		if ( false !== $brace && $brace < 4 )
+			return false;
+	}
+	$token = $data[0];
+	switch ( $token ) {
+	case 's' :
+		if ( $strict ) {
+			if ( '"' !== substr( $data, -2, 1 ) ) {
+				return false;
+			}
+		} elseif ( false === strpos( $data, '"' ) ) {
+			return false;
+		}
+		// or else fall through
+	case 'a' :
+	case 'O' :
+		return (bool) preg_match( "/^{$token}:[0-9]+:/s", $data );
+	case 'b' :
+	case 'i' :
+	case 'd' :
+		$end = $strict ? '$' : '';
+		return (bool) preg_match( "/^{$token}:[0-9.E-]+;$end/", $data );
+	}
+	return false;
+}
