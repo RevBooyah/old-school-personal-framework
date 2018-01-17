@@ -47,10 +47,10 @@ class mysql extends db {
     public $link;
 
     public static function getInstance() {
-        if (is_null(self::$instance)) {
-            self::$instance = new self;
+        if (is_null(static::$instance)) {
+            static::$instance = new static();
         }
-        return self::$instance;
+        return static::$instance;
     }
 
     // The __construct method is protected, so it can only be called from within the class (getInstance).
@@ -59,6 +59,9 @@ class mysql extends db {
         $this->link=new PDO($dsn,DB_USER,DB_PASS);
     }
 
+    private function __clone() {} // Do not allow cloning or deserialization.
+    private function __wakeup() {}
+	
     // But seriously - use the PDO::prepare() method!
     public function clean($string) {
         return(PDO::quote($string));
